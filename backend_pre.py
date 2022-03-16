@@ -96,8 +96,19 @@ class back_end():
 
     ####內容
     def content(self):
+        text = "1\n2\n3\n4\n5\n6"
+
         browser.switch_to.frame(browser.find_element_by_xpath('//*[@id="cke_1_contents"]/iframe'))
-        browser.find_element_by_id('article_content').send_keys('52')
+        if "\n" in text: #check if exists \n tag in text
+            textarea = browser.find_element_by_id('article_content')
+            textsplit = text.split("\r\n") #explode
+            textsplit_len = len(textsplit)-1 #get last element
+            for text in textsplit:
+                textarea.send_keys(text)
+                if textsplit.index(text) != textsplit_len: #do what you need each time, if not the last element
+                    textarea.send_keys(Keys.SHIFT+Keys.ENTER)
+        else:
+            browser.find_element_by_id('article_content').send_keys('52')
         browser.switch_to.default_content()
         browser.switch_to.frame("mainFrame")
 
