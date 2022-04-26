@@ -142,7 +142,6 @@ if __name__=="__main__":
         backend = back_end()
         login = log_in()
         login.login_old_backstage(browser)
-        # backend.login_old_backstage()
         backend.choose_function_management()
         backend.to_article_create()
         # backend.title_save()
